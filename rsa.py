@@ -49,12 +49,28 @@ def get_decryption_key(e, n, L):
             return i
 
 
+def do_encryption(m, e, n):
+    # m^e % n
+    c = (m**e) % n
+    return c
+
+
+def do_decryption(c, d, n):
+    # c^d % n
+    m = (c**d) % n
+    return m
+
+
 if __name__ == "__main__":
-    (p, q) = get_primes(200, 700)
+    (p, q) = get_primes(234, 4958)
     print("P:", p, "Q:", q)
     n = calculate_n(p, q)
     L = calculate_totient(p, q)
     e = get_encryption_key(n, L)
     d = get_decryption_key(e, n, L)
-    print(e, d, L)
+
+    c = do_encryption(23498, e, n)
+    print(c)
+    m = do_decryption(c, d, n)
+    print(m)
     
